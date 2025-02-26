@@ -14,6 +14,8 @@ import { Login } from './components/auth/Login';
 import { SignUp } from './components/auth/SignUp';
 import { AdminRoute } from './components/AdminRoute';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { SquareRootPractice } from './components/SquareRootPractice';
+import { SquareNumber } from './components/SquareNumber';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
@@ -55,6 +57,16 @@ function App() {
                 <Route path="/practice/abacus" element={
                   <ProtectedRoute>
                     <AbacusPractice />
+                  </ProtectedRoute>
+                } />
+                <Route path="/practice/square-root" element={
+                  <ProtectedRoute>
+                    <SquareRootPractice />
+                  </ProtectedRoute>
+                } />
+                <Route path="/practice/square-number" element={
+                  <ProtectedRoute>
+                    <SquareNumber />
                   </ProtectedRoute>
                 } />
 

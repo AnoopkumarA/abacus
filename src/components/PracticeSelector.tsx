@@ -31,6 +31,13 @@ export const PracticeSelector: React.FC = () => {
       icon: <Square size={40} />,
       color: '#4CAF50',
       onClick: () => navigate('/practice/square-root')
+    },
+    {
+      title: 'Square Number Practice',
+      description: 'Practice finding square roots of given numbers',
+      icon: <Square size={40} />,
+      color: '#FF5722',
+      onClick: () => navigate('/practice/square-number')
     }
   ];
 
@@ -88,39 +95,60 @@ export const PracticeSelector: React.FC = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                border: '1px solid',
-                borderColor: 'divider',
-                borderRadius: 4,
+                background: 'rgba(255, 255, 255, 0.8)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: 16,
                 overflow: 'hidden',
                 position: 'relative',
+                '&:before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: `linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))`,
+                  zIndex: 0
+                },
                 '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
+                  transform: 'translateY(-8px) scale(1.02)',
+                  boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
                   '& .hover-button': {
                     opacity: 1,
                     transform: 'translateY(0)'
+                  },
+                  '&:before': {
+                    opacity: 0.8
                   }
                 },
-                transition: 'all 0.3s ease'
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
               }}
             >
               <Box
                 sx={{
                   width: '100%',
-                  height: '4px',
+                  height: '6px',
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  bgcolor: feature.color
+                  background: `linear-gradient(90deg, ${feature.color}, ${feature.color}88)`,
+                  boxShadow: `0 2px 12px ${feature.color}40`
                 }}
               />
               <Box
                 sx={{
-                  p: 2,
-                  borderRadius: '16px',
-                  bgcolor: `${feature.color}15`,
+                  p: 2.5,
+                  borderRadius: '20px',
+                  background: `linear-gradient(135deg, ${feature.color}20, ${feature.color}10)`,
+                  backdropFilter: 'blur(5px)',
                   color: feature.color,
-                  mb: 3
+                  mb: 3,
+                  transform: 'rotate(0deg)',
+                  transition: 'transform 0.3s ease',
+                  '&:hover': {
+                    transform: 'rotate(-5deg) scale(1.1)'
+                  }
                 }}
               >
                 {feature.icon}
@@ -154,13 +182,18 @@ export const PracticeSelector: React.FC = () => {
                 className="hover-button"
                 sx={{
                   mt: 'auto',
-                  bgcolor: feature.color,
+                  background: `linear-gradient(135deg, ${feature.color}, ${feature.color}dd)`,
                   minWidth: 200,
-                  py: 1.5,
-                  borderRadius: '10px',
+                  py: 1.8,
+                  px: 4,
+                  borderRadius: '14px',
+                  fontWeight: 600,
+                  letterSpacing: '0.5px',
+                  boxShadow: `0 8px 20px ${feature.color}40`,
                   '&:hover': {
-                    bgcolor: feature.color,
-                    filter: 'brightness(0.9)'
+                    background: `linear-gradient(135deg, ${feature.color}, ${feature.color})`,
+                    transform: 'translateY(-2px)',
+                    boxShadow: `0 12px 24px ${feature.color}60`
                   }
                 }}
               >
