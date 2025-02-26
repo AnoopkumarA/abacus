@@ -63,42 +63,82 @@ const ensureValidSubtraction = (numbers: number[]): number[] => {
   return result;
 };
 
+// Add new helper for ensuring proper subtraction order
+const enforceSubtractionRule = (numbers: number[]): number[] => {
+  const result = [...numbers];
+  for (let i = 1; i < result.length; i++) {
+    if (result[i] < 0) { // If it's a subtraction
+      // Ensure the number being subtracted is smaller than the previous number
+      if (Math.abs(result[i]) > Math.abs(result[i-1])) {
+        // Swap the numbers and maintain the negative sign
+        const smaller = Math.min(Math.abs(result[i-1]), Math.abs(result[i]));
+        const larger = Math.max(Math.abs(result[i-1]), Math.abs(result[i]));
+        result[i-1] = larger;
+        result[i] = -smaller;
+      }
+    }
+  }
+  return result;
+};
+
 const calculateResult = (numbers: number[]): number => {
   return numbers.reduce((acc, curr) => acc + curr, 0);
 };
+
+const generateCategoryNumber = (max: number) => Math.floor(Math.random() * max) + 1;
 
 const generateProblemForCategory = (category: string, questionNumber: number): Problem => {
   let baseNumber: number;
   let rows: number[];
   let correctAnswer: number;
   let attempts = 0;
-  const maxAttempts = 10;
+  const maxAttempts = 30;
 
   switch (category) {
     case 'A':
       do {
-        baseNumber = Math.abs(generateSmallDigit()); // Ensure positive
-        rows = Array(4).fill(0).map(() => generateMixedSmallDigit());
+        baseNumber = generateCategoryNumber(6); // 1 to 6
+        rows = Array(4).fill(0).map(() => {
+          const num = generateCategoryNumber(6);
+          return Math.random() > 0.5 ? num : -num;
+        });
+
         let numbers = ensureMixedSigns([baseNumber, ...rows]);
         numbers = ensureValidSubtraction(numbers);
-        baseNumber = numbers[0]; // Will always be positive
+        baseNumber = numbers[0];
         rows = numbers.slice(1);
-        correctAnswer = Math.abs(calculateResult(numbers)) % 10;
+        correctAnswer = calculateResult(numbers);
         attempts++;
-      } while ((correctAnswer === 0 || correctAnswer > 9) && attempts < maxAttempts);
+      } while ((Math.abs(correctAnswer) > 9 || correctAnswer === 0) && attempts < maxAttempts);
+      
+      if (attempts >= maxAttempts) {
+        baseNumber = 4;
+        rows = [2, -3, 1, -2];
+        correctAnswer = 2;
+      }
       break;
 
     case 'B':
       do {
-        baseNumber = Math.abs(generateSmallDigit()); // Ensure positive
-        rows = Array(4).fill(0).map(() => generateMixedSmallDigit());
+        baseNumber = generateCategoryNumber(9); // 1 to 9
+        rows = Array(4).fill(0).map(() => {
+          const num = generateCategoryNumber(9);
+          return Math.random() > 0.5 ? num : -num;
+        });
+
         let numbers = ensureMixedSigns([baseNumber, ...rows]);
-        numbers = ensureValidSubtraction(numbers);
-        baseNumber = numbers[0]; // Will always be positive
+        numbers = enforceSubtractionRule(numbers); // Apply new subtraction rule
+        baseNumber = numbers[0];
         rows = numbers.slice(1);
-        correctAnswer = Math.abs(calculateResult(numbers)) % 10;
+        correctAnswer = calculateResult(numbers);
         attempts++;
-      } while ((correctAnswer === 0 || correctAnswer > 9) && attempts < maxAttempts);
+      } while ((Math.abs(correctAnswer) > 9 || correctAnswer === 0) && attempts < maxAttempts);
+      
+      if (attempts >= maxAttempts) {
+        baseNumber = 7;
+        rows = [4, -2, 3, -1]; // Safe fallback with proper subtraction order
+        correctAnswer = 11;
+      }
       break;
 
     case 'C':
@@ -159,7 +199,7 @@ const generateProblemForCategory = (category: string, questionNumber: number): P
     id: questionNumber,
     baseNumber,
     rows,
-    correctAnswer
+    correctAnswer: Math.abs(correctAnswer)
   };
 };
 

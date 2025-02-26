@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { AbacusPractice } from './components/AbacusPractice';
+import { PracticeSelector } from './components/PracticeSelector';
 import { Navbar } from './components/Navbar';
 import { Home } from './components/Home';
 import { About } from './components/About';
@@ -47,6 +48,11 @@ function App() {
 
                 {/* Protected User Routes */}
                 <Route path="/practice" element={
+                  <ProtectedRoute>
+                    <PracticeSelector />
+                  </ProtectedRoute>
+                } />
+                <Route path="/practice/abacus" element={
                   <ProtectedRoute>
                     <AbacusPractice />
                   </ProtectedRoute>

@@ -79,6 +79,11 @@ export const AbacusPractice: React.FC = () => {
   };
 
   const handleAnswerChange = (id: number, value: string) => {
+    // Ensure answers for Category A are single digits
+    if (selectedCategory === 'A' && value.length > 1) {
+      return;
+    }
+
     setAnswers(prev => ({
       ...prev,
       [id]: value ? Number(parseInt(value)) : 0
