@@ -84,13 +84,18 @@ export const SquareRootPractice: React.FC = () => {
 
   const handleDownloadResults = () => {
     const results = {
-      category: 'Square Root Practice',
+      category: 'Square Number Practice',
       score: calculateScore(),
       totalQuestions: problems.length,
       timeSpent: 300 - timer,
       questionsAttempted: Object.keys(answers).length,
       answers,
-      problems,
+      problems: problems.map(problem => ({
+        id: problem.id,
+        baseNumber: problem.number,
+        rows: [],
+        correctAnswer: problem.correctAnswer
+      }))
     };
 
     const pdf = generateResultsPDF(results);
@@ -137,14 +142,14 @@ export const SquareRootPractice: React.FC = () => {
                   fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' } 
                 }}
               >
-                Square Root Practice
+                Square Number Practice
               </Typography>
               <Typography 
                 variant="subtitle1" 
                 color="text.secondary" 
                 sx={{ mt: 1 }}
               >
-                Find the square root of {problems.length} numbers within the time limit
+                Find the squaring of {problems.length} numbers within the time limit
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>

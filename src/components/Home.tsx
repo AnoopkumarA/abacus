@@ -199,7 +199,8 @@ export const Home = () => {
                     variant="outlined"
                     size="large"
                     component={RouterLink}
-                    to="/about"
+                    to="/kindergarten"
+                
                     sx={{
                       py: { xs: 1, sm: 2 },
                       px: { xs: 2, sm: 4 },
@@ -217,7 +218,7 @@ export const Home = () => {
                       transition: 'all 0.3s ease',
                     }}
                   >
-                    Learn More
+                    KinderGarden
                   </Button>
                 </Box>
               </MotionBox>

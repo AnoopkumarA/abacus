@@ -20,7 +20,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import { Home as HomeIcon, Brain, Info, Calculator, Menu as MenuIcon, BarChart, LogOut, Bell, BellDotIcon, BellDot, Settings } from 'lucide-react';
+import { Home as HomeIcon, Brain, Info, Calculator, Menu as MenuIcon, BarChart, LogOut, Bell, BellDotIcon, BellDot, Settings, Gamepad2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../config/supabase';
@@ -45,6 +45,7 @@ export const Navbar = () => {
   const publicNavItems = [
     { path: '/', label: 'Home', icon: <HomeIcon size={20} /> },
     { path: '/about', label: 'About', icon: <Info size={20} /> },
+    { path: '/kindergarten', label: 'Kids Zone', icon: <Gamepad2 size={20} /> },
     { path: '/signup', label: 'Sign Up', icon: <Bell size={20} /> },
   ];
 
@@ -52,6 +53,7 @@ export const Navbar = () => {
     { path: '/', label: 'Home', icon: <HomeIcon size={20} /> },
     { path: '/practice', label: 'Practice', icon: <Calculator size={20} /> },
     { path: '/about', label: 'About', icon: <Info size={20} /> },
+    { path: '/kindergarten', label: 'Kids Zone', icon: <Gamepad2 size={20} /> },
     { path: '/analysis', label: 'Analysis', icon: <BarChart size={20} /> },
     ...(isAdmin ? [{ path: '/admin', label: 'Admin', icon: <Settings size={20} /> }] : []),
   ];
@@ -332,11 +334,11 @@ export const Navbar = () => {
             {drawer}
             {user && (
               <ListItem 
-                button 
                 onClick={handleLogout}
                 sx={{
                   mt: 'auto',
                   color: 'error.main',
+                  cursor: 'pointer',
                   '&:hover': {
                     backgroundColor: 'error.light',
                     color: 'white',

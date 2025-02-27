@@ -16,6 +16,9 @@ import { AdminRoute } from './components/AdminRoute';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { SquareRootPractice } from './components/SquareRootPractice';
 import { SquareNumber } from './components/SquareNumber';
+import { KindergartenAbacus } from './components/KindergartenAbacus';
+import { KindergartenHub } from './components/KindergartenHub';
+import { KindergartenCalculation } from './components/KindergartenCalculation';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
@@ -69,6 +72,9 @@ function App() {
                     <SquareNumber />
                   </ProtectedRoute>
                 } />
+                <Route path="/kindergarten" element={<KindergartenHub />} />
+                <Route path="/kindergarten/counting" element={<KindergartenAbacus />} />
+                <Route path="/kindergarten/calculation" element={<KindergartenCalculation />} />
 
                 {/* Admin Routes */}
                 <Route path="/admin" element={

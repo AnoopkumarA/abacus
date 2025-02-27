@@ -26,14 +26,14 @@ export const PracticeSelector: React.FC = () => {
       onClick: () => navigate('/practice/abacus')
     },
     {
-      title: 'Square Root Practice',
-      description: 'Master the art of calculating square roots mentally',
+      title: 'Square Number Practice',
+      description: 'Master the art of calculating squaring numbers mentally',
       icon: <Square size={40} />,
       color: '#4CAF50',
       onClick: () => navigate('/practice/square-root')
     },
     {
-      title: 'Square Number Practice',
+      title: 'Square Root Practice',
       description: 'Practice finding square roots of given numbers',
       icon: <Square size={40} />,
       color: '#FF5722',

@@ -84,13 +84,18 @@ export const SquareNumber: React.FC = () => {
 
   const handleDownloadResults = () => {
     const results = {
-      category: 'Square Number Practice',
+      category: 'Square Root Practice',
       score: calculateScore(),
       totalQuestions: problems.length,
       timeSpent: 300 - timer,
       questionsAttempted: Object.keys(answers).length,
       answers,
-      problems,
+      problems: problems.map(problem => ({
+        id: problem.id,
+        baseNumber: problem.number,
+        rows: [],
+        correctAnswer: problem.correctAnswer
+      }))
     };
 
     const pdf = generateResultsPDF(results);
@@ -137,7 +142,7 @@ export const SquareNumber: React.FC = () => {
                   fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' } 
                 }}
               >
-                Square Number Practice
+                Square Root Practice
               </Typography>
               <Typography 
                 variant="subtitle1" 
