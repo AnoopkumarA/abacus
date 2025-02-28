@@ -118,6 +118,20 @@ export const KindergartenAbacus: React.FC = () => {
     }, 2000);
   };
 
+  // Add keydown event listener
+  React.useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        handleCheck();
+      } else if (event.key >= '1' && event.key <= '9') {
+        handleBeadClick(parseInt(event.key));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [userAnswer]); // Add userAnswer as dependency
+
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <MotionBox

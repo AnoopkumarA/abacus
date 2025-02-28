@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Typography, Button, Box, Grid, Paper, Divider } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Brain, Trophy, Clock, Target, ArrowRight, Users, Star, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import mathPatternImage from '/math-pattern.png';
@@ -9,6 +9,8 @@ const MotionBox = motion(Box as any);
 const MotionPaper = motion(Paper as any);
 
 export const Home = () => {
+  const navigate = useNavigate();
+
   const features = [
     {
       icon: <Brain size={40} />,
@@ -199,8 +201,7 @@ export const Home = () => {
                     variant="outlined"
                     size="large"
                     component={RouterLink}
-                    to="/kindergarten"
-                
+                    to="/practice"
                     sx={{
                       py: { xs: 1, sm: 2 },
                       px: { xs: 2, sm: 4 },
@@ -343,85 +344,100 @@ export const Home = () => {
       </Container>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Typography 
-          variant="h2" 
-          align="center" 
-          gutterBottom
-          sx={{ 
-            mb: 6,
-            fontSize: { xs: '2.3rem' },
-            fontWeight: 'bold',
-            background: 'linear-gradient(45deg, #1976d2, #82b1ff)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            color: 'transparent',
-          }}
-        >
-          Why Choose Us?
-        </Typography>
-
-        <Grid container spacing={4}>
-          {features.map((feature, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <MotionPaper
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                sx={{
-                  p: 4,
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  borderRadius: 4,
-                  position: 'relative',
-                  overflow: 'hidden',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
-                  },
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                <Box
+      <Box sx={{ py: 8, px: 2, background: 'linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(255,255,255,0.02) 100%)' }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4}>
+            {features.map((feature, index) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <MotionPaper
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  elevation={0}
                   sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '4px',
-                    bgcolor: feature.color,
-                  }}
-                />
-                <Box
-                  sx={{
-                    mb: 2,
-                    p: 2,
-                    borderRadius: '50%',
-                    bgcolor: `${feature.color}15`,
-                    color: feature.color,
+                    p: 3,
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: 4,
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    '&:before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: `linear-gradient(135deg, ${feature.color}22 0%, ${feature.color}11 100%)`,
+                      opacity: 0.5,
+                      transition: 'opacity 0.3s ease',
+                    },
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      '&:before': {
+                        opacity: 0.8,
+                      },
+                      '& .icon-wrapper': {
+                        transform: 'scale(1.1)',
+                        background: `linear-gradient(135deg, ${feature.color}44 0%, ${feature.color}22 100%)`,
+                      },
+                    },
+                    transition: 'transform 0.3s ease',
                   }}
                 >
-                  {feature.icon}
-                </Box>
-                <Typography 
-                  variant="h5" 
-                  component="h3" 
-                  gutterBottom
-                  sx={{ fontWeight: 'bold' }}
-                >
-                  {feature.title}
-                </Typography>
-                <Typography color="text.secondary">
-                  {feature.description}
-                </Typography>
-              </MotionPaper>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+                  <Box
+                    className="icon-wrapper"
+                    sx={{
+                      width: 80,
+                      height: 80,
+                      borderRadius: '50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: `linear-gradient(135deg, ${feature.color}33 0%, ${feature.color}11 100%)`,
+                      mb: 2,
+                      transition: 'all 0.3s ease',
+                      '& svg': {
+                        color: feature.color,
+                        strokeWidth: 1.5,
+                      },
+                    }}
+                  >
+                    {feature.icon}
+                  </Box>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mb: 1,
+                      fontWeight: 600,
+                      position: 'relative',
+                      zIndex: 1,
+                    }}
+                  >
+                    {feature.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    sx={{
+                      position: 'relative',
+                      zIndex: 1,
+                    }}
+                  >
+                    {feature.description}
+                  </Typography>
+                </MotionPaper>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
     </Box>
   );
-}; 
+};

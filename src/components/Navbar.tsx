@@ -45,7 +45,6 @@ export const Navbar = () => {
   const publicNavItems = [
     { path: '/', label: 'Home', icon: <HomeIcon size={20} /> },
     { path: '/about', label: 'About', icon: <Info size={20} /> },
-    { path: '/kindergarten', label: 'Kids Zone', icon: <Gamepad2 size={20} /> },
     { path: '/signup', label: 'Sign Up', icon: <Bell size={20} /> },
   ];
 

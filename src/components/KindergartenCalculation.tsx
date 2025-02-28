@@ -102,6 +102,12 @@ export const KindergartenCalculation: React.FC = () => {
     }, 2000);
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      checkAnswer();
+    }
+  };
+
   if (!currentQuestion) return null;
 
   return (
@@ -158,6 +164,7 @@ export const KindergartenCalculation: React.FC = () => {
                 type="number"
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
+                onKeyPress={handleKeyPress}
                 style={{
                   fontSize: '2rem',
                   width: '150px',
