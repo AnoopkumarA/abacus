@@ -8,7 +8,7 @@ import {
   Button
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Calculator, Square, Brain, Target, ChevronRight } from 'lucide-react';
+import { Calculator, Square, Brain, Target, ChevronRight, Gamepad2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const MotionPaper = motion(Paper as any);
@@ -38,6 +38,13 @@ export const PracticeSelector: React.FC = () => {
       icon: <Target size={32} strokeWidth={1.5} />,
       color: '#FF5722',
       onClick: () => navigate('/practice/square-number')
+    },
+    {
+      title: 'Memory Game',
+      description: 'Enhance memory and learning with AI assistance',
+      icon: <Gamepad2 size={32} strokeWidth={1.5} />,
+      color: '#9C27B0',
+      onClick: () => navigate('/memory-game')
     }
   ];
 

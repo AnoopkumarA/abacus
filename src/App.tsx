@@ -19,6 +19,7 @@ import { SquareNumber } from './components/SquareNumber';
 import { KindergartenAbacus } from './components/KindergartenAbacus';
 import { KindergartenHub } from './components/KindergartenHub';
 import { KindergartenCalculation } from './components/KindergartenCalculation';
+import { MemoryGame } from './components/MemoryGame';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
@@ -70,6 +71,11 @@ function App() {
                 <Route path="/practice/square-number" element={
                   <ProtectedRoute>
                     <SquareNumber />
+                  </ProtectedRoute>
+                } />
+                <Route path="/memory-game" element={
+                  <ProtectedRoute>
+                    <MemoryGame />
                   </ProtectedRoute>
                 } />
                 <Route path="/kindergarten" element={<KindergartenHub />} />

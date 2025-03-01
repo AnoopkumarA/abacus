@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Grid, Typography, Box, Paper, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Calculator, Brain, ChevronRight } from 'lucide-react';
+import { Calculator, Brain, ChevronRight, School } from 'lucide-react';
 
 const MotionPaper = motion(Paper as any);
 const MotionBox = motion(Box as any);
@@ -12,19 +12,26 @@ export const KindergartenHub: React.FC = () => {
 
   const features = [
     {
-      title: "Picture Counting",
-      description: "Learn to count with fun pictures and animations!",
-      icon: <Brain size={32} strokeWidth={1.5} />,
-      path: "/kindergarten/counting",
-      color: "#4CAF50"
+      title: 'Abacus Learning',
+      description: 'Master the ancient art of abacus calculation',
+      icon: <School size={40} />,
+      path: '/kindergarten/abacus',
+      color: '#2196F3',
     },
     {
-      title: "Picture Calculation",
-      description: "Learn basic math with colorful pictures!",
-      icon: <Calculator size={32} strokeWidth={1.5} />,
-      path: "/kindergarten/calculation",
-      color: "#2196F3"
-    }
+      title: 'Basic Calculation',
+      description: 'Practice fundamental arithmetic operations',
+      icon: <Calculator size={40} />,
+      path: '/kindergarten/calculation',
+      color: '#4CAF50',
+    },
+    {
+      title: 'Memory Game',
+      description: 'Enhance memory and learning with AI assistance',
+      icon: <Brain size={40} />,
+      path: '/memory-game',
+      color: '#9C27B0',
+    },
   ];
 
   return (
